@@ -18,8 +18,8 @@ public class ModuleContainer implements Container {
     public ModuleContainer(int moduleCapacity) {
         this.moduleCapacity = moduleCapacity;
         this.modulesByInput = new LinkedList<>();
-        this.energyModules = new LinkedHashMap<Integer, EnergyModule>();
-        this.absorbingModules = new LinkedHashMap<Integer, AbsorbingModule>();
+        this.energyModules = new LinkedHashMap<>();
+        this.absorbingModules = new LinkedHashMap<>();
     }
 
     public void addEnergyModule(EnergyModule energyModule) {

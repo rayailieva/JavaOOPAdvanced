@@ -2,10 +2,10 @@ package cresla.entities.modules;
 
 import cresla.interfaces.AbsorbingModule;
 
-public abstract class AbsorbingModuleImpl extends ModuleImpl implements AbsorbingModule {
+public abstract class AbstractAbsorbingModule extends ModuleImpl implements AbsorbingModule {
     private int heatAbsorbing;
 
-    public AbsorbingModuleImpl(int id, int heatAbsorbing) {
+     AbstractAbsorbingModule(int id, int heatAbsorbing) {
         super(id);
         this.heatAbsorbing = heatAbsorbing;
     }

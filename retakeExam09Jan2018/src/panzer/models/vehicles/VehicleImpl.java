@@ -19,7 +19,7 @@ public abstract class VehicleImpl implements Vehicle {
     private Assembler vehicleAssembler;
     private List<Part> parts;
 
-    public VehicleImpl(String model, double weight, BigDecimal price, int attack, int defense, int hitPoints) {
+    protected VehicleImpl(String model, double weight, BigDecimal price, int attack, int defense, int hitPoints) {
         this.model = model;
         this.weight = weight;
         this.price = price;

@@ -13,7 +13,7 @@ public abstract class ReactorImpl implements Reactor {
     private int id;
     private Container moduleContainer;
 
-    public ReactorImpl(Container moduleContainer,int id) {
+    protected ReactorImpl(Container moduleContainer,int id) {
         this.id = id;
         this.moduleContainer = moduleContainer;
     }

@@ -9,7 +9,7 @@ public abstract class PartImpl implements Part {
     private double weight;
     private BigDecimal price;
 
-    public PartImpl(String model, double weight, BigDecimal price) {
+    protected PartImpl(String model, double weight, BigDecimal price) {
         this.model = model;
         this.weight = weight;
         this.price = price;

@@ -2,11 +2,11 @@ package cresla.entities.modules;
 
 import cresla.interfaces.EnergyModule;
 
-public class EnergyModuleImpl extends ModuleImpl implements EnergyModule {
+public abstract class AbstractEnergyModule extends ModuleImpl implements EnergyModule {
 
     private int energyOutput;
 
-    EnergyModuleImpl(int id, int heatAbsorbing) {
+    AbstractEnergyModule(int id, int heatAbsorbing) {
         super(id);
         this.energyOutput = heatAbsorbing;
     }
