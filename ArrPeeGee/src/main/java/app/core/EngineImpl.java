@@ -1,4 +1,4 @@
-package app.engine;
+package app.core;
 
 import app.contracts.Battlefield;
 import app.contracts.Engine;

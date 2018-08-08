@@ -13,6 +13,15 @@ public class Warrior extends BaseHero{
 
     @Override
     public double getDamage() {
-        return 0;
+        return (this.getStrength() * 2) + this.getDexterity();
     }
+
+    @Override
+    protected void increaseStats(int multiplier) {
+        this.setStrength(Config.WARRIOR_BASE_STRENGTH * multiplier);
+        this.setDexterity(Config.WARRIOR_BASE_DEXTERITY * multiplier);
+        this.setIntelligence(Config.WARRIOR_BASE_INTELLIGENCE * multiplier);
+    }
+
+
 }

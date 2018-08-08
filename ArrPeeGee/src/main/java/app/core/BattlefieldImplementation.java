@@ -1,9 +1,6 @@
 package app.core;
 
 import app.contracts.*;
-import app.io.ConsoleWriter;
-import app.models.actions.OneVsOne;
-import app.models.participants.heroes.Warrior;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;

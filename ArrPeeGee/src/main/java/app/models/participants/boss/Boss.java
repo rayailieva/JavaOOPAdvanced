@@ -1,14 +1,15 @@
-package app.models.participants;
+package app.models.participants.boss;
 
 import app.contracts.Targetable;
 import app.models.Config;
+import app.models.participants.Participant;
 
-public class Boss implements Targetable{
+public class Boss extends Participant {
     private String name;
     private double health;
     private double damage;
     private double gold;
-   // private boolean isAlive;
+    // private boolean isAlive;
 
     public Boss() {
         this.gold = Config.BOSS_GOLD;
