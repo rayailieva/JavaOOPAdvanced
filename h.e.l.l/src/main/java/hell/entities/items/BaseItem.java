@@ -21,31 +21,52 @@ public abstract class BaseItem implements Item {
 
     @Override
     public String getName() {
-        return null;
+        return this.name;
     }
 
     @Override
     public int getStrengthBonus() {
-        return 0;
+        return this.strengthBonus;
     }
 
     @Override
     public int getAgilityBonus() {
-        return 0;
+        return this.agilityBonus;
     }
 
     @Override
     public int getIntelligenceBonus() {
-        return 0;
+        return this.intelligenceBonus;
     }
 
     @Override
     public int getHitPointsBonus() {
-        return 0;
+        return this.hitPointsBonus;
     }
 
     @Override
     public int getDamageBonus() {
-        return 0;
+        return this.damageBonus;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder item = new StringBuilder();
+
+        item
+                .append(String.format("###Item: %s", this.name))
+                .append(System.lineSeparator())
+                .append(String.format("###+%d Strength", this.strengthBonus))
+                .append(System.lineSeparator())
+                .append(String.format("###+%d Agility", this.agilityBonus))
+                .append(System.lineSeparator())
+                .append(String.format("###+%d Intelligence", this.intelligenceBonus))
+                .append(System.lineSeparator())
+                .append(String.format("###+%d HitPoints", this.hitPointsBonus))
+                .append(System.lineSeparator())
+                .append(String.format("###+%d Damage", this.damageBonus));
+
+
+        return item.toString();
     }
 }

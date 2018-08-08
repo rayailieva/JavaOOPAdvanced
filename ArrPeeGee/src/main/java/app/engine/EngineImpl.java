@@ -1,5 +1,4 @@
-package app.core;
-
+package app.engine;
 
 import app.contracts.Battlefield;
 import app.contracts.Engine;
@@ -8,7 +7,6 @@ import app.contracts.Writer;
 
 import java.io.IOException;
 import java.util.Arrays;
-
 
 public class EngineImpl implements Engine {
     private Reader reader;
@@ -21,7 +19,6 @@ public class EngineImpl implements Engine {
         this.battleField = battlefield;
     }
 
-
     @Override
     public void run() throws IOException{
 
@@ -31,11 +28,7 @@ public class EngineImpl implements Engine {
 
             switch (lineTokens[0].toLowerCase()) {
                 case "createparticipant":
-                    try {
-                        this.battleField.createParticipant(lineTokens[1], lineTokens[2]);
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                    }
+                    this.battleField.createParticipant(lineTokens[1], lineTokens[2]);
                     break;
                 case "createaction":
                     this.battleField.createAction(lineTokens[1],
@@ -60,5 +53,4 @@ public class EngineImpl implements Engine {
             line = this.reader.readLine();
         }
     }
-    }
-
+}

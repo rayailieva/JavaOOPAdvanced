@@ -4,8 +4,7 @@ import app.contracts.Hero;
 import app.contracts.Targetable;
 import app.models.Config;
 
-public class Wizard extends BaseHero implements Hero {
-
+public class Wizard implements Hero {
     private int strength;
     private int dexterity;
     private int intelligence;
@@ -16,7 +15,7 @@ public class Wizard extends BaseHero implements Hero {
     boolean isAlive;
     double gold;
 
-    public Wizard() {
+    public Wizard(){
         this.isAlive = true;
         this.level = 1;
         this.gold = Config.HERO_START_GOLD;
@@ -93,7 +92,7 @@ public class Wizard extends BaseHero implements Hero {
 
     @Override
     public void setHealth(double health) {
-       this.health = health;
+        this.health = health;
     }
 
     @Override

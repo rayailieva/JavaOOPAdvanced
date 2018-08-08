@@ -4,7 +4,7 @@ import app.contracts.Hero;
 import app.contracts.Targetable;
 import app.models.Config;
 
-public class Warrior extends BaseHero implements Hero {
+public class Warrior implements Hero {
 
     private int strength;
     private int dexterity;

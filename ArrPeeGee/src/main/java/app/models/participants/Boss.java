@@ -1,37 +1,19 @@
-package app.models.participants.heroes;
+package app.models.participants;
 
-import app.contracts.Hero;
 import app.contracts.Targetable;
+import app.models.Config;
 
-public abstract class BaseHero implements Hero {
-    @Override
-    public int getStrength() {
-        return 0;
-    }
+public class Boss implements Targetable{
+    private String name;
+    private double health;
+    private double damage;
+    private double gold;
+   // private boolean isAlive;
 
-    @Override
-    public void setStrength(int strength) {
-
-    }
-
-    @Override
-    public int getDexterity() {
-        return 0;
-    }
-
-    @Override
-    public void setDexterity(int dexterity) {
-
-    }
-
-    @Override
-    public int getIntelligence() {
-        return 0;
-    }
-
-    @Override
-    public void setIntelligence(int intelligence) {
-
+    public Boss() {
+        this.gold = Config.BOSS_GOLD;
+        this.health = Config.BOSS_HEALTH;
+        this.damage = Config.BOSS_DAMAGE;
     }
 
     @Override

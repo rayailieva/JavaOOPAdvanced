@@ -4,8 +4,7 @@ import app.contracts.Hero;
 import app.contracts.Targetable;
 import app.models.Config;
 
-public class Necromancer extends BaseHero implements Hero {
-
+public class Necromancer implements Hero {
     private int strength;
     private int dexterity;
     private int intelligence;
@@ -16,7 +15,7 @@ public class Necromancer extends BaseHero implements Hero {
     boolean isAlive;
     double gold;
 
-    public Necromancer() {
+    public Necromancer(){
         this.isAlive = true;
         this.level = 1;
         this.gold = Config.HERO_START_GOLD;

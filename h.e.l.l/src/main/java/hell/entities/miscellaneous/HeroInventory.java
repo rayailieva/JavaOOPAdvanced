@@ -1,7 +1,7 @@
 package hell.entities.miscellaneous;
 
 import hell.annotation.ItemCollection;
-import hell.factories.ItemFactory;
+import hell.entities.items.CommonItem;
 import hell.interfaces.Inventory;
 import hell.interfaces.Item;
 import hell.interfaces.Recipe;
@@ -80,7 +80,7 @@ public class HeroInventory implements Inventory {
             this.commonItems.remove(item);
         }
 
-        Item newItem = ItemFactory.createCommonItem(recipe.getName(), recipe.getStrengthBonus(),
+        Item newItem = new CommonItem(recipe.getName(), recipe.getStrengthBonus(),
                 recipe.getAgilityBonus(), recipe.getIntelligenceBonus(), recipe.getHitPointsBonus(), recipe.getDamageBonus());
 
         this.commonItems.put(newItem.getName(), newItem);

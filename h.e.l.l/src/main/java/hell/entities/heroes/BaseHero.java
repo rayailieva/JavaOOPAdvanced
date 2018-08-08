@@ -7,18 +7,24 @@ import hell.interfaces.Item;
 import hell.interfaces.Recipe;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public abstract class BaseHero implements Hero {
+
     private String name;
+
     private int strength;
+
     private int agility;
+
     private int intelligence;
+
     private int hitPoints;
+
     private int damage;
+
     private Inventory inventory;
 
     protected BaseHero(String name, int strength, int agility, int intelligence, int hitPoints, int damage, Inventory inventory) {
@@ -62,16 +68,24 @@ public abstract class BaseHero implements Hero {
     }
 
     @Override
-    public Collection<Item> getItems() throws IllegalAccessException {
-        Map<String, Item> items = new LinkedHashMap<>();
-        Field[] declaredFields = this.inventory.getClass().getDeclaredFields();
-        for(Field field : declaredFields){
-            if(field.isAnnotationPresent(ItemCollection.class)){
-                field.setAccessible(true);
-                items = (Map<String, Item>) field.get(this.inventory);
+    @SuppressWarnings("unchecked")
+    public Collection<Item> getItems() {
+        Collection<Item> items = null;
+        Field[] inventoryFields = this.inventory.getClass().getDeclaredFields();
+
+        for (Field inventoryField : inventoryFields) {
+            if (inventoryField.isAnnotationPresent(ItemCollection.class)) {
+                inventoryField.setAccessible(true);
+                Map<String, Item> itemMap = null;
+                try {
+                    itemMap = (Map<String, Item>) inventoryField.get(this.inventory);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+                items = itemMap.values();
             }
         }
-        return new ArrayList<>(items.values());
+        return items;
     }
 
     @Override
@@ -82,5 +96,32 @@ public abstract class BaseHero implements Hero {
     @Override
     public void addRecipe(Recipe recipe) {
         this.inventory.addRecipeItem(recipe);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder hero = new StringBuilder();
+
+        String items = this.getItems().size() == 0 ?
+                " None" :
+                System.lineSeparator() + this.getItems()
+                        .stream()
+                        .map(Item::toString)
+                        .collect(Collectors.joining(System.lineSeparator()));
+
+        hero
+                .append(String.format("Hero: %s, Class: %s", this.name, this.getClass().getSimpleName()))
+                .append(System.lineSeparator())
+                .append(String.format("HitPoints: %d, Damage: %d", this.getHitPoints(), this.getDamage()))
+                .append(System.lineSeparator())
+                .append(String.format("Strength: %d", this.getStrength()))
+                .append(System.lineSeparator())
+                .append(String.format("Agility: %d", this.getAgility()))
+                .append(System.lineSeparator())
+                .append(String.format("Intelligence: %d", this.getIntelligence()))
+                .append(System.lineSeparator())
+                .append(String.format("Items:%s", items));
+
+        return hero.toString();
     }
 }
