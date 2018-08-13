@@ -1,8 +1,13 @@
 package app.core;
 
-import app.contracts.*;
+import app.contracts.Action;
+import app.contracts.Battlefield;
+import app.contracts.Targetable;
+import app.contracts.TargetableFactory;
+import app.io.ConsoleWriter;
+import app.models.actions.OneVsOne;
+import app.models.participants.Warrior;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -10,24 +15,21 @@ import java.util.TreeMap;
 
 public class BattlefieldImplementation implements Battlefield {
 
-    private ActionFactory actionsFactory;
     private Map<String, Targetable> participants;
     private List<Action> executedActions;
-    private Writer writer;
-    private TargetableFactory targetableFactory;
+    ConsoleWriter writer;
+    TargetableFactory targetableFactory;
 
-    public BattlefieldImplementation(Writer writer, ActionFactory actionFactory, TargetableFactory targetableFactory) {
-        this.participants = new TreeMap<>();
+    public BattlefieldImplementation(ConsoleWriter writer) {
         this.executedActions = new ArrayList<>();
-        this.actionsFactory = actionFactory;
-        this.targetableFactory = targetableFactory;
+        this.participants = new TreeMap<>();
         this.writer = writer;
     }
 
     @Override
     public void createAction(String actionName, String... participantNames) {
         try {
-            Action action = this.actionsFactory.create(actionName, participantNames);
+            Action action = new OneVsOne();
 
             List<Targetable> actionParticipants = new ArrayList<>();
             for (String name : participantNames){
@@ -48,28 +50,28 @@ public class BattlefieldImplementation implements Battlefield {
     }
 
     @Override
-    public void createParticipant(String name, String className){
+    public void createParticipant(String name, String className) {
 
         if (this.participants.containsKey(name)){
             System.out.println("Participant with that name already exists.");
             return;
         }
 
-        Targetable targetable = null;
+        Targetable targetable;
 
-        try {
-            targetable = this.targetableFactory.create(name, className);
-        } catch (IllegalAccessException | InstantiationException | InvocationTargetException | NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        switch (className) {
+            case "Warrior":
+                targetable = new Warrior();
+                targetable.setName(name);
+                this.participants.put(targetable.getName(), targetable);
+                System.out.println(
+                        String.format("%s %s entered the battlefield.",
+                                targetable.getClass().getSimpleName(),
+                                targetable.getName()));
+                break;
+            default:
+                System.out.println("Participant class does not exist.");
         }
-
-        this.participants.put(targetable.getName(), targetable);
-        this.writer.writeLine(
-                String.format("%s %s entered the battlefield.",
-                        targetable.getClass().getSimpleName(),
-                        targetable.getName()));
     }
 
     @Override
